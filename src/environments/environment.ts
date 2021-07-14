@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  urlFunctions1: ""
+  //urlFunctions1: "https://prodapps1.azurewebsites.net", //temp test
+  //urlFunctions2: "http://localhost:7071", //temp test
 };
 
 /*

@@ -36,6 +36,7 @@ namespace TheGoSite.Function
                 record.PartitionKey = "thegosite1";
                 record.RowKey = Guid.NewGuid().ToString();
                 record.SourceOfRequst = name;
+                //Add other details of the users, like client type, language, etc
 
                 bool result = InsertIntoAzureTable(record);
                 responseMessage = "Table insert resulted in: " + result.ToString();
