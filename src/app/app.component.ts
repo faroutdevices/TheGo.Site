@@ -5,7 +5,7 @@ import { ThermLoggingStatus } from '../thermLoggngStatus';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environment';
 
-import { DeviceDetectorService } from 'ngx-device-detector';
+//import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent {
   deviceInfo = null;
 
   //constructor(private route: ActivatedRoute, private http: HttpClient, private deviceService: DeviceDetectorService)
-  constructor(private route: ActivatedRoute, private http: HttpClient, private deviceService: DeviceDetectorService)
+  constructor(private route: ActivatedRoute, private http: HttpClient)
   {
     //this.epicFunction();
   }
@@ -28,7 +28,7 @@ export class AppComponent {
     console.log('Source of request: '+ param1);
 
 
-    this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + param1, null).subscribe(returnstuff =>{})
+    this.http.get<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + param1).subscribe(returnstuff =>{})
 
   }
 
