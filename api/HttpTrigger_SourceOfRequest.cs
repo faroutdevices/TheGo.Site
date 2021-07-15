@@ -54,7 +54,7 @@ namespace TheGoSite.Function
                 // Set a cookie
                 CookieOptions option = new CookieOptions();
                 option.Expires = DateTime.Now.AddYears(1);
-                option.Domain = "thego.site";
+                option.Domain = "www.thego.site";
                 option.HttpOnly = true;
                 //// A little non logical way to actually get the HttpResponse (from the HttpRequest and its HttpContext)
                 req.HttpContext.Response.Cookies.Append("BeenHereBefore", "true", option);
