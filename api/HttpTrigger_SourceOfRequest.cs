@@ -58,7 +58,7 @@ namespace TheGoSite.Function
                 //// Make the cookie available for the browser
                 option.HttpOnly = true;
                 //// A little non logical way to actually get the HttpResponse (from the HttpRequest and its HttpContext)
-                req.HttpContext.Response.Cookies.Append("BeenHereBefore2", "true", option);
+                req.HttpContext.Response.Cookies.Append("BeenHereBefore", "true", option);
 
 
                 RecordEntity record = new RecordEntity();
