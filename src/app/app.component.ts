@@ -25,10 +25,14 @@ export class AppComponent {
   ngOnInit() {
 
     let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');
-    console.log('Source of request: '+ param1);
+    //let param2 = this.route.snapshot.queryParamMap.get('blah')?.toString();
+    //let param1 = this.http.request.toString();
+    console.log('hi' + param1);
+    //console.log(param2);
+    //console.log('Source of request: ' +  + ' hmm');
 
 
-    this.http.get<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + param1).subscribe(returnstuff =>{})
+    this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + param1, null).subscribe(returnstuff =>{})
 
   }
 
