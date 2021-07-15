@@ -25,10 +25,10 @@ export class AppComponent {
   ngOnInit() {
 
     let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');
-    console.log('Source of request: '+ param1 + 'mmmmdm');
+    console.log('Source of request: '+ param1);
 
 
-    this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + 'http://localhost:7071/api/HttpTrigger_SourceOfRequest?SourceOfRequest=c' + param1, null).subscribe(returnstuff =>{})
+    this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + param1, null).subscribe(returnstuff =>{})
 
   }
 

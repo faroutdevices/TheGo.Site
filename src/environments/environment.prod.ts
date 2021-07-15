@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  urlFunctions1: "http://localhost:7071/api/HttpTrigger_SourceOfRequest"
 };
