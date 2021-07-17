@@ -8,11 +8,11 @@ const routes: Routes = [
   //{path: '', component: WelcomeComponent},
 
   {
-    path: '', component: WelcomeComponent,
-    runGuardsAndResolvers: 'always',
+    path: '',
+    //runGuardsAndResolvers: 'always',
     //canActivate: [AuthGuard],
     children: [
-      {path: 'hi/:sourceofrequest', component: WelcomeComponent}
+      {path: ':sourceofrequest', component: WelcomeComponent}
     ]
   },
   // {path: 'errors', component: TestErrorsComponent},
