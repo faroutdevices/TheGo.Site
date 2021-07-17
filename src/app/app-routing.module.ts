@@ -5,18 +5,18 @@ import { WelcomeComponent } from './welcome/welcome.component';
 //import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  {path: '', component: WelcomeComponent},
-  {path: 'hi', component: WelcomeComponent},
-  {path: 'hi/:sourceofrequest', component: WelcomeComponent}
+  //{path: '', component: WelcomeComponent},
+  //{path: 'hi', component: WelcomeComponent},
+  //{path: 'hi/:sourceofrequest', component: WelcomeComponent}
 
-  //{
-    //path: '',
+  {
+    path: '',
     //runGuardsAndResolvers: 'always',
     //canActivate: [AuthGuard],
-    //children: [
-    //  {path: ':sourceofrequest', component: WelcomeComponent}
-    //]
-  //},
+    children: [
+      {path: 'hi/:sourceofrequest', component: WelcomeComponent}
+    ]
+  },
   // {path: 'errors', component: TestErrorsComponent},
   // {path: 'not-found', component: NotFoundComponent},
   // {path: 'server-error', component: ServerErrorComponent},
