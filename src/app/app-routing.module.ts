@@ -5,11 +5,11 @@ import { WelcomeComponent } from './welcome/welcome.component';
 //import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  {path: '', component: WelcomeComponent},
+  //{path: '', component: WelcomeComponent},
 
   {
-    path: '',
-    //runGuardsAndResolvers: 'always',
+    path: '', component: WelcomeComponent,
+    runGuardsAndResolvers: 'always',
     //canActivate: [AuthGuard],
     children: [
       {path: ':sourceofrequest', component: WelcomeComponent}
