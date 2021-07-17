@@ -9,7 +9,7 @@ const routes: Routes = [
 
   {
     path: '',
-    runGuardsAndResolvers: 'always',
+    //runGuardsAndResolvers: 'always',
     //canActivate: [AuthGuard],
     children: [
       {path: ':sourceofrequest', component: WelcomeComponent}
