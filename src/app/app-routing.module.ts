@@ -1,17 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 //import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: WelcomeComponent},
 
   {
     path: '',
     runGuardsAndResolvers: 'always',
     //canActivate: [AuthGuard],
     children: [
-      {path: ':sourceofrequest', component: HomeComponent}
+      {path: ':sourceofrequest', component: WelcomeComponent}
     ]
   },
   // {path: 'errors', component: TestErrorsComponent},
