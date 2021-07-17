@@ -16,7 +16,8 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    /////let blah = this.route.snapshot.paramMap.get('sourceofrequest')
+    let blah = this.route.snapshot.paramMap.get('sourceofrequest');
+    console.log('a' + blah + 'b');
     /////this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + blah, null).subscribe(returnstuff =>{})
 
     /////let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');

@@ -5,6 +5,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 //import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
+  {path: '', component: WelcomeComponent},
   {path: ':sourceofrequest', component: WelcomeComponent},
 
   //{
