@@ -6,7 +6,8 @@ import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
   {path: '', component: WelcomeComponent},
-  {path: ':sourceofrequest', component: WelcomeComponent},
+  {path: 'hi', component: WelcomeComponent},
+  {path: 'hi/:sourceofrequest', component: WelcomeComponent}
 
   //{
     //path: '',
