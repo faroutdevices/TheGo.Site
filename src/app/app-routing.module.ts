@@ -12,7 +12,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     //canActivate: [AuthGuard],
     children: [
-      {path: ':sourceofrequest', component: WelcomeComponent}
+      {path: 'hi/:sourceofrequest', component: WelcomeComponent}
     ]
   },
   // {path: 'errors', component: TestErrorsComponent},
