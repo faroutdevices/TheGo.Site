@@ -1,10 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { HomeComponent } from './home/home.component';
+//import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
-  { path: 'i/:SourceOfRequest', component: WelcomeComponent },
-];
+  {path: '', component: HomeComponent},
+
+  {
+    path: '',
+    runGuardsAndResolvers: 'always',
+    //canActivate: [AuthGuard],
+    children: [
+      {path: ':sourceofrequest', component: HomeComponent}
+    ]
+  },
+  // {path: 'errors', component: TestErrorsComponent},
+  // {path: 'not-found', component: NotFoundComponent},
+  // {path: 'server-error', component: ServerErrorComponent},
+  // {path: '**', component: NotFoundComponent, pathMatch: 'full'},
+  ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

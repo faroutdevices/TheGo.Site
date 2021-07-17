@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
+import { ThermLoggingStatus } from '../../thermLoggngStatus';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
@@ -8,16 +12,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class WelcomeComponent implements OnInit {
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient) { }
 
   ngOnInit(): void {
-    console.log('hiiiiiiiIII');
 
-    let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');
+    let blah = this.route.snapshot.paramMap.get('sourceofrequest')
+    this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + blah, null).subscribe(returnstuff =>{})
+
+    /////let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');
     //let param2 = this.route.snapshot.queryParamMap.get('blah')?.toString();
     //let param1 = this.http.request.toString();
-    console.log('  hi' + param1);
-
 
   }
 

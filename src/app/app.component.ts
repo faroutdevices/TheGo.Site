@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-import { ThermLoggingStatus } from '../thermLoggngStatus';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../environments/environment';
-
+//import { environment } from '../environments/environment';
 //import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
@@ -13,26 +10,21 @@ import { environment } from '../environments/environment';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'thegosite1';
-  deviceInfo = null;
 
   //constructor(private route: ActivatedRoute, private http: HttpClient, private deviceService: DeviceDetectorService)
-  constructor(private route: ActivatedRoute, private http: HttpClient)
+  constructor(private route: ActivatedRoute)
   {
     //this.epicFunction();
   }
 
   ngOnInit() {
 
-    let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');
+    //let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');
     //let param2 = this.route.snapshot.queryParamMap.get('blah')?.toString();
     //let param1 = this.http.request.toString();
-    console.log('hi' + param1);
     //console.log(param2);
     //console.log('Source of request: ' +  + ' hmm');
-
-
-    this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + param1, null).subscribe(returnstuff =>{})
+    //this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + param1, null).subscribe(returnstuff =>{})
 
   }
 
