@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/rrouter';
 import { HttpClient } from '@angular/common/http';
 //import { environment } from '../environments/environment';
 //import { DeviceDetectorService } from 'ngx-device-detector';
