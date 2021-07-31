@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
+using Microsoft.Extensions.Configuration;
 
 namespace TheGoSite.Function
 {
@@ -38,8 +39,9 @@ namespace TheGoSite.Function
         {
           //ILogger log;
             Boolean bSuccess = false;
+            var config = new ConfigurationBuilder().AddEnvironmentVariables().Build();
 
-            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
+            CloudStorageAccount storageAccount = CloudStorageAccount.Parse(config["AzureTableConnection"]);
             CloudTableClient tableClient = storageAccount.CreateCloudTableClient();
             CloudTable table = tableClient.GetTableReference("SourceOfRequest");
             table.CreateIfNotExistsAsync();

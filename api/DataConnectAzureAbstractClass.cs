@@ -19,6 +19,6 @@ namespace TheGoSite.Function
 {
     public abstract class DataConnectAzureAbstractClass
     {
-        public static string connectionString = "DefaultEndpointsProtocol=https;AccountName=thegosite1;AccountKey=PrDRf2DX/SY/FXW42vCF4868+ggQnLIQs/96b3+WtMB3pFGc8TC+/dhiD70uFEW+8cO3VDaTgJ3KrsbQUURXOg==;EndpointSuffix=core.windows.net";
+        public static string connectionString = "";
     }
 }
