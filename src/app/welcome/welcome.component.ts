@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
-/////import { ThermLoggingStatus } from '../../thermLoggngStatus';
 import { HttpClient } from '@angular/common/http';
-/////import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-welcome',
@@ -16,14 +13,12 @@ export class WelcomeComponent implements OnInit {
 
   ngOnInit(): void {
 
-    let blah = this.route.snapshot.paramMap.get('sourceofrequest');
-    console.log('a' + blah + 'b');
-    /////this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + blah, null).subscribe(returnstuff =>{})
-
-    /////let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');
-    //let param2 = this.route.snapshot.queryParamMap.get('blah')?.toString();
+    let testPassValue = this.route.snapshot.paramMap.get('sourceofrequest');
+    console.log(testPassValue);
+    //this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + testPassValue, null).subscribe(returnstuff =>{})
+    //let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');
+    //let param2 = this.route.snapshot.queryParamMap.get('test')?.toString();
     //let param1 = this.http.request.toString();
-
   }
 
 }

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-//import { environment } from '../environments/environment';
-//import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-root',
@@ -11,21 +9,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
 
-  //constructor(private route: ActivatedRoute, private http: HttpClient, private deviceService: DeviceDetectorService)
   constructor(private route: ActivatedRoute)
   {
+    //might be using this to detect client specs for logging purposes
     //this.epicFunction();
   }
 
   ngOnInit() {
-
     //let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');
-    //let param2 = this.route.snapshot.queryParamMap.get('blah')?.toString();
+    //let param2 = this.route.snapshot.queryParamMap.get('SourceOfRequest')?.toString();
     //let param1 = this.http.request.toString();
-    //console.log(param2);
-    //console.log('Source of request: ' +  + ' hmm');
+    //console.log('Source of request: ' + param1);
     //this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + param1, null).subscribe(returnstuff =>{})
-
   }
 
   // epicFunction() {
