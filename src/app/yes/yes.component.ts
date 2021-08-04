@@ -12,6 +12,7 @@ import { environment } from '../../environments/environment';
   styleUrls: ['./yes.component.css']
 })
 export class YesComponent implements OnInit {
+  title: string = "";
   model: any = {}; //this is for email, and whatever other info I may try to collect
 
   constructor() { }
@@ -20,9 +21,7 @@ export class YesComponent implements OnInit {
   }
 
   SubmitEmail() {
-
     console.log(this.model.email);
-    //this.MakeTheChart(this.model.startDate, this.model.endDate);
-}
+  }
 
 }
