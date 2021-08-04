@@ -1,0 +1,18 @@
+<p>Consider joining us..</p>
+
+<img src="assets/img/mx_pic1.jpg" />
+<img src="assets/img/mx_pic2.jpg" />
+<img src="assets/img/mx_pic3.jpg" />
+
+<p>We specialize in expat relocation.</p>
+<p>What does that mean exactly?</p>
+<p>It's easy. You purchase a plane ticket and go to the airport.</p>
+<p>We do the rest.</p>
+
+<form #formtest1Form="ngForm" (ngSubmit)="SubmitEmail()">
+
+  <div>Enter your email for all the details:</div>
+  <div style="width: 150px;"><input type="text" class="form-control" name="email" [(ngModel)]="model.email" placeholder="email" /></div>
+
+   <button class="btn btn-sucess mr-2" type="submit">Go</button>
+</form>

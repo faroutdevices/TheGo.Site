@@ -10,7 +10,7 @@ import { CookieService} from 'ngx-cookie-service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  title = 'Hi';
+  title = '';
   private cookieValue: string = 'false';
 
   constructor(private route: ActivatedRoute, private http: HttpClient, private cookieService: CookieService) { }
@@ -27,11 +27,15 @@ export class HomeComponent implements OnInit {
     if (this.cookieValue == 'true')
     {
       beenHereBefore = 'true';
+      this.title = "Hi, welcome back!"
     }
     else
     {
       this.cookieService.set('BeenHereBefore', 'true'); //update this with expire date, etc perhaps
+      this.title = "Hi, welcome";
     }
+
+
 
     //note this is an insert, do doing PUT, need to test in Postman, browser won't work
     this.http.put(environment.urlFunctions1 + '?SourceOfRequest=' + sourceofrequest + '&BeenHereBefore=' + beenHereBefore, null).subscribe(returnstuff =>{})
