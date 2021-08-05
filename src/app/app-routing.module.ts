@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { WelcomeComponent } from './welcome/welcome.component';
-
 import { YesComponent } from './yes/yes.component';
 import { NoComponent } from './no/no.component';
 import { MaybeComponent } from './maybe/maybe.component';

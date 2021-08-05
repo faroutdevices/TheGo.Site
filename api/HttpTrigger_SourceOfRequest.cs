@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Table;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json;
 
 namespace TheGoSite.Function
 {
@@ -22,18 +23,34 @@ namespace TheGoSite.Function
 
             string sourceOfRequest = req.Query["SourceOfRequest"];
             string beenHereBefore = req.Query["BeenHereBefore"];
+            string pathRequested = req.Query["PathRequested"];
             string remoteIpAddress = req.HttpContext.Connection.RemoteIpAddress.ToString();
 
             RecordEntity record = new RecordEntity();
             record.PartitionKey = "thegosite1";
             record.RowKey = Guid.NewGuid().ToString();
-            record.SourceOfRequst = sourceOfRequest;
+            record.Source_Of_Requst = sourceOfRequest;
             record.Client_IP_Address = remoteIpAddress;
             record.Cookie_Previously_Set = beenHereBefore;
+            record.Path_Requested = pathRequested;
 
             bool result = InsertIntoAzureTable(record);
 
-            return new OkObjectResult(result);
+            //create id to be set as cookie value identifying this client/browser
+            MyResponseObject mRO = new MyResponseObject();
+            if (beenHereBefore == "")
+            {
+              mRO.TheGoSiteClientID = Guid.NewGuid().ToString();
+            }
+
+            var options = new JsonSerializerOptions
+            {
+                WriteIndented = true,
+            };
+            var jsonVar = System.Text.Json.JsonSerializer.Serialize(mRO, options);
+
+            return new OkObjectResult(jsonVar);
+
         }
         static Boolean InsertIntoAzureTable(RecordEntity record)
         {

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
-
 import { HttpClient } from '@angular/common/http';
 import { interval, Subscription } from 'rxjs';
 import { environment } from '../../environments/environment';
-
 
 @Component({
   selector: 'app-yes',

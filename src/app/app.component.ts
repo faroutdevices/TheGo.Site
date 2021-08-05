@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { CookieService } from 'ngx-cookie-service';
+import { ApiReturnedObject1 } from './api-returned-object1';
+import { environment } from 'src/environments/environment';
+import { Router,NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -9,31 +13,42 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
 
-  constructor(private route: ActivatedRoute)
+  private sourceofrequest: string = '';
+  private cookieValue: string = '';
+  private pathRequested: string = '';
+
+  constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService)
   {
-    //might be using this to detect client specs for logging purposes
-    //this.epicFunction();
+    this.router.events.subscribe((e) => {
+        if (e instanceof NavigationEnd) {
+          console.log("in subscribing to fire on every router event" + e);
+          this.SendPageRequestDetails_GenerateClientID();
+          }
+      }
+    )
   }
 
-  ngOnInit() {
-    //let param1 = this.route.snapshot.paramMap.get('SourceOfRequest');
-    //let param2 = this.route.snapshot.queryParamMap.get('SourceOfRequest')?.toString();
-    //let param1 = this.http.request.toString();
-    //console.log('Source of request: ' + param1);
-    //this.http.put<ThermLoggingStatus>(environment.urlFunctions1 + '?SourceOfRequest=' + param1, null).subscribe(returnstuff =>{})
+  SendPageRequestDetails_GenerateClientID()
+  {
+    // //what is the source of the request, QR code, weblink, direct input
+    this.sourceofrequest = <string>this.route.snapshot.paramMap.get('sourceofrequest')
+    this.pathRequested = window.location.pathname;
+    this.cookieValue = this.cookieService.get('BeenHereBefore');
+
+      this.http.get<ApiReturnedObject1>(environment.urlFunctions1 + '?SourceOfRequest=' + this.sourceofrequest + '&BeenHereBefore=' + this.cookieValue + '&PathRequested=' + this.pathRequested).subscribe(returnstuff =>
+      {
+        if (returnstuff.TheGoSiteClientID != null)
+        {
+          this.cookieValue = returnstuff.TheGoSiteClientID;
+        }
+        this.cookieService.set('BeenHereBefore', this.cookieValue); //update this with expire date, etc perhaps
+      }
+    )
   }
 
-  // epicFunction() {
-  //   console.log('hello `Home` component');
-  //   //this.deviceInfo = this.deviceService.getDeviceInfo();
-  //   const isMobile = this.deviceService.isMobile();
-  //   const isTablet = this.deviceService.isTablet();
-  //   const isDesktopDevice = this.deviceService.isDesktop();
-  //   console.log(this.deviceInfo);
-  //   console.log(isMobile);  // returns if the device is a mobile device (android / iPhone / windows-phone etc)
-  //   console.log(isTablet);  // returns if the device us a tablet (iPad etc)
-  //   console.log(isDesktopDevice); // returns if the app is running on a Desktop browser.
-  // }
+  ngOnInit(): void {
+  }
+
 
 }
 

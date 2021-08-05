@@ -16,8 +16,9 @@ namespace TheGoSite.Function
         }
 
         public RecordEntity() { }
-        public string SourceOfRequst { get; set; }
+        public string Source_Of_Requst { get; set; }
         public string Client_IP_Address { get; set; }
+        public string Path_Requested { get; set; }
         public string Cookie_Previously_Set { get; set; }
     }
 }
