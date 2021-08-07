@@ -43,16 +43,16 @@ export class AppComponent {
     )
 
     this.questionsaaa[0] = new Question();
-    this.questionsaaa[0].addQuestion("Q1","1A1","1a2","1a3");
+    this.questionsaaa[0].addQuestion("Question1","Yes","Maybe","No");
 
     this.questionsaaa[1] = new Question();
-    this.questionsaaa[1].addQuestion("Q2","2A1","2a2","2a3");
+    this.questionsaaa[1].addQuestion("Question2","Yes","Maybe","No");
 
     this.questionsaaa[2] = new Question();
-    this.questionsaaa[2].addQuestion("Q3","3A1","3a2","3a3");
+    this.questionsaaa[2].addQuestion("Question3","Yes","Maybe","No");
 
     this.questionsaaa[3] = new Question();
-    this.questionsaaa[3].addQuestion("Q4","4A1","4a2","a3");
+    this.questionsaaa[3].addQuestion("Question4","Yes","Maybe","No");
 
   }
 
