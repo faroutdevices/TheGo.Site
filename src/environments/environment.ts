@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  urlFunctions1: "http://localhost:7071/api/HttpTrigger_SourceOfRequest",
+  urlFunctions1: "http://localhost:7071",
   //urlFunctions1: "https://prodapps1.azurewebsites.net", //temp test
   //urlFunctions2: "http://127.0.0.1", //temp test
 };

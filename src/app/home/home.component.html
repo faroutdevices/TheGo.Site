@@ -345,21 +345,46 @@
 
   </div>
 
-  <!-- Resources -->
-  <h2>Have you ever considered living abroad?</h2>
+<h1>{{ question }}</h1>
 
-  <div class="card-container">
+  <!-- Resources
+  <div [ngSwitch]="selection.value">
+    <span *ngSwitchDefault><h2>Have you ever considered living abroadaaa?</h2></span>
+    <span *ngSwitchCase="'1'"><h2>Do you have a passport?</h2></span>
+    <span *ngSwitchCase="'2'"><h2>Are you 18 and above?</h2></span>
+    <span *ngSwitchCase="'3'"><h2></h2></span>
+</div>
 
-    <a class="card" rel="noopener" routerLink='/yes'>
-      <span>Yes</span>
+
+<input type="hidden" #selection>
+
+<div class="card-container">
+  <div class="card card-small" (click)="selection.value = '2'" tabindex="0">
+      <svg class="material-icons" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+
+    <span>Adventure</span>
+  </div>
+</div>
+
+<form #formtest1Form="ngForm" (ngSubmit)="clickFunction()">
+  <div style="text-align: center;">Enter your email for monthly updates:</div><br />
+  <div style="width: 250px;text-align: center;"><input type="text" class="form-control" name="email" [(ngModel)]="model.email" placeholder="email" />
+   &nbsp;<button class="btn btn-sucess mr-2" type="submit">Go</button>
+  </div>
+</form> -->
+
+  <div class="card-container" *ngIf="isShow">
+
+    <a class="card" rel="noopener" (click)="clickFunction(answer1)">
+      <span>{{ answer1 }}</span>
     </a>
 
-    <a class="card" rel="noopener" routerLink='/maybe'>
-      <span>Maybe</span>
+    <a class="card" rel="noopener" (click)="clickFunction(answer2)">
+      <span>{{ answer2 }}</span>
     </a>
 
-    <a class="card" rel="noopener" routerLink='/no'>
-      <span>No</span>
+    <a class="card" rel="noopener" (click)="clickFunction(answer3)">
+      <span>{{ answer3 }}</span>
     </a>
 
   </div>
