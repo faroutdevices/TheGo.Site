@@ -5,18 +5,26 @@ import { CookieService } from 'ngx-cookie-service';
 import { ApiReturnedObject1 } from './api-returned-object1';
 import { environment } from 'src/environments/environment';
 import { Router,NavigationEnd } from '@angular/router';
+import ImportedQuestions from './questionsList1.json'; //Read values from my json file
 
-class Question{
-  public question: string = "";
-  public answers: string[] = [];
+// class Question{
+//   public questionText: string = "";
+//   public answer: string[] = [];
 
-  addQuestion(newQuestion: string, newAnswer1: string, newAnswer2: string, newAnswer3: string)
-  {
-    this.question = newQuestion;
-    this.answers.push(newAnswer1);
-    this.answers.push(newAnswer2);
-    this.answers.push(newAnswer3);
-  }
+//   public addQuestion(newQuestion: string, newAnswers: string[], optionalSomething?: string)
+//   {
+//     this.questionText = newQuestion;
+
+//     newAnswers.forEach(element => {
+//       this.answer.push(element);
+//     });
+//   }
+// }
+
+
+interface Question{
+  questionText: string;
+  answer: string[];
 }
 
 @Component({
@@ -30,6 +38,7 @@ export class AppComponent {
   private cookieValue: string = '';
   private pathRequested: string = '';
   public questionsaaa: Question[] = [];
+  public bunchQuestions: Question[] = [];
   public LastQuestionCompleted: number = 0;
 
   constructor(private route: ActivatedRoute, private router: Router, private http: HttpClient, private cookieService: CookieService)
@@ -42,18 +51,14 @@ export class AppComponent {
       }
     )
 
-    this.questionsaaa[0] = new Question();
-    this.questionsaaa[0].addQuestion("Question1","Yes","Maybe","No");
+     this.bunchQuestions = ImportedQuestions as Question[];
 
-    this.questionsaaa[1] = new Question();
-    this.questionsaaa[1].addQuestion("Question2","Yes","Maybe","No");
-
-    this.questionsaaa[2] = new Question();
-    this.questionsaaa[2].addQuestion("Question3","Yes","Maybe","No");
-
-    this.questionsaaa[3] = new Question();
-    this.questionsaaa[3].addQuestion("Question4","Yes","Maybe","No");
-
+      // bunchQuestions.forEach(element => {  //works
+      //   console.log(element.questionText);
+      //     element.answer.forEach(element2 => {
+      //         console.log(element2);
+      //     })
+      // });
   }
 
   SendPageRequestDetails_GenerateClientID()
@@ -75,7 +80,6 @@ export class AppComponent {
   }
 
   ngOnInit(): void {
-
   }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, Input, TemplateRef } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from '../app.component';
 import { HttpClient } from '@angular/common/http';
@@ -23,21 +23,26 @@ export class HomeComponent {
   selection: any = {};
   AppComponent: any;
 
-  constructor(public appComponent: AppComponent, private http: HttpClient, private cookieService: CookieService) {
-
+  constructor(public appComponent: AppComponent, private http: HttpClient, private cookieService: CookieService, private componentFactoryResolver: ComponentFactoryResolver) {
+    console.log("in constructor of home component");
     //start with first question, or where user left off
-      this.question = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].question
-      this.answer1 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[0];
-      this.answer2 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[1];
-      this.answer3 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[2];
+      this.question = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionText;
+
+      this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].answer.forEach(element =>
+          {console.log(element)}
+        );
   }
 
   ngOnInit(): void {
+    console.log("in ngoninit of home component");
+
+    document.createElement('div');
+
   }
 
   clickFunction(answer: string)
   {
-    console.log(this.appComponent.questionsaaa[0].question);
+    //console.log(this.appComponent.questionsaaa[0].question);
     console.log(answer);
 
     this.SendQuestionAndAnswerResponseToDB(answer);
@@ -46,10 +51,10 @@ export class HomeComponent {
 
     if (this.appComponent.questionsaaa.length > this.appComponent.LastQuestionCompleted)
     {
-      this.question = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].question
-      this.answer1 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[0];
-      this.answer2 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[1];
-      this.answer3 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[2];
+      //this.question = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].question
+     // this.answer1 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[0];
+      //this.answer2 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[1];
+      //this.answer3 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[2];
     }
     else
     {
