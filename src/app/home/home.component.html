@@ -373,21 +373,14 @@
   </div>
 </form> -->
 
-  <div class="card-container" *ngIf="isShow">
 
-    <a class="card" rel="noopener" (click)="clickFunction(answer1)">
-      <span>{{ answer1 }}</span>
-    </a>
-
-    <a class="card" rel="noopener" (click)="clickFunction(answer2)">
-      <span>{{ answer2 }}</span>
-    </a>
-
-    <a class="card" rel="noopener" (click)="clickFunction(answer3)">
-      <span>{{ answer3 }}</span>
-    </a>
-
-  </div>
+<div *ngIf="this.appComponent.bunchQuestions.length > this.appComponent.LastQuestionCompleted">
+    <div class="card-container" style="display: inline-block;" *ngFor="let hero of this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].answer">
+        <a class="card" rel="noopener" (click)="clickFunction(hero)">
+          <span>{{ hero }}</span>
+        </a>
+    </div>
+</div>
 
   <br /><br />
   <!-- Links -->

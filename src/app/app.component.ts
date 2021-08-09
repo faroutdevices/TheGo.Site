@@ -37,7 +37,6 @@ export class AppComponent {
   private sourceofrequest: string = '';
   private cookieValue: string = '';
   private pathRequested: string = '';
-  public questionsaaa: Question[] = [];
   public bunchQuestions: Question[] = [];
   public LastQuestionCompleted: number = 0;
 
@@ -53,12 +52,6 @@ export class AppComponent {
 
      this.bunchQuestions = ImportedQuestions as Question[];
 
-      // bunchQuestions.forEach(element => {  //works
-      //   console.log(element.questionText);
-      //     element.answer.forEach(element2 => {
-      //         console.log(element2);
-      //     })
-      // });
   }
 
   SendPageRequestDetails_GenerateClientID()

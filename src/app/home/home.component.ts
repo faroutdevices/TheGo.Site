@@ -34,27 +34,18 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    console.log("in ngoninit of home component");
-
-    document.createElement('div');
-
   }
 
   clickFunction(answer: string)
   {
-    //console.log(this.appComponent.questionsaaa[0].question);
-    console.log(answer);
-
     this.SendQuestionAndAnswerResponseToDB(answer);
 
     this.appComponent.LastQuestionCompleted++;
 
-    if (this.appComponent.questionsaaa.length > this.appComponent.LastQuestionCompleted)
+    if (this.appComponent.bunchQuestions.length > this.appComponent.LastQuestionCompleted)
     {
-      //this.question = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].question
-     // this.answer1 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[0];
-      //this.answer2 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[1];
-      //this.answer3 = this.appComponent.questionsaaa[this.appComponent.LastQuestionCompleted].answers[2];
+      this.question = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionText;
+      //There's only one question which we assign here, but multiple answers which we create buttons for in the html template
     }
     else
     {

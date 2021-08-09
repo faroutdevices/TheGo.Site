@@ -2,16 +2,16 @@
   {
     "questionText" : "Question1 text here",
     "answer" : [
-      "Aaanswer Text 1a",
-      "Aaanswer text 2",
-      "aaanser text 3" ]
+      "yes",
+      "maybe",
+      "no" ]
   },
   {
     "questionText" : "Question2 text here",
     "answer" : [
-      "Aaanswer Text 1b",
-      "Aaanswer text 2",
-      "aaanser text 3" ]
+      "yes2",
+      "maybe2",
+      "no2" ]
   },
   {
     "questionText" : "Question3 text here",
