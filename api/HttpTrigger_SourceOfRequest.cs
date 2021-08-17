@@ -26,6 +26,14 @@ namespace TheGoSite.Function
             string pathRequested = req.Query["PathRequested"];
             string remoteIpAddress = req.HttpContext.Connection.RemoteIpAddress.ToString();
 
+            //create id to be set as cookie value identifying this client/browser
+            MyResponseObject mRO = new MyResponseObject();
+            if (beenHereBefore == "")
+            {
+              beenHereBefore = Guid.NewGuid().ToString();
+              mRO.TheGoSiteClientID = beenHereBefore;
+            }
+
             RecordEntity record = new RecordEntity();
             record.PartitionKey = "thegosite1";
             record.RowKey = Guid.NewGuid().ToString();
@@ -35,13 +43,6 @@ namespace TheGoSite.Function
             record.Path_Requested = pathRequested;
 
             bool result = InsertIntoAzureTable(record);
-
-            //create id to be set as cookie value identifying this client/browser
-            MyResponseObject mRO = new MyResponseObject();
-            if (beenHereBefore == "")
-            {
-              mRO.TheGoSiteClientID = Guid.NewGuid().ToString();
-            }
 
             var options = new JsonSerializerOptions
             {
