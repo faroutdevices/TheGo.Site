@@ -1,30 +1,23 @@
 [
   {
-    "questionText" : "Question1 text here",
+    "questionText" : "How is your food?",
     "answer" : [
-      "yes",
-      "maybe",
-      "no" ]
+      "Ok",
+      "Great",
+      "Bad" ]
   },
   {
-    "questionText" : "Question2 text here",
+    "questionText" : "How is your drink?",
     "answer" : [
-      "yes2",
-      "maybe2",
-      "no2" ]
+      "Ok",
+      "Great",
+      "Bad" ]
   },
   {
-    "questionText" : "Question3 text here",
+    "questionText" : "How is the ambience?",
     "answer" : [
-      "Aaanswer Text 1c",
-      "Aaanswer text 2",
-      "aaanser text 3" ]
-  },
-  {
-    "questionText" : "Question4 text here",
-    "answer" : [
-      "Aaanswer Text 1d",
-      "Aaanswer text 2",
-      "aaanser text 3" ]
+      "Ok",
+      "Great",
+      "Bad" ]
   }
 ]

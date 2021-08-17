@@ -1,19 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { WelcomeComponent } from './welcome/welcome.component';
-import { YesComponent } from './yes/yes.component';
-import { NoComponent } from './no/no.component';
-import { MaybeComponent } from './maybe/maybe.component';
+import { ClientActivityComponent } from './client-activity/client-activity.component';
 
 //import { AuthGuard } from './_guards/auth.guard';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'welcome', component: WelcomeComponent},
-  {path: 'yes', component: YesComponent},
-  {path: 'no', component: NoComponent},
-  {path: 'maybe', component: MaybeComponent},
+  {path: 'clientactivity', component: ClientActivityComponent},
 
   {
     path: '',

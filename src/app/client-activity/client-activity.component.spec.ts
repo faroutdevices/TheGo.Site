@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { YesComponent } from './yes.component';
+import { ClientActivityComponent } from './client-activity.component';
 
-describe('YesComponent', () => {
-  let component: YesComponent;
-  let fixture: ComponentFixture<YesComponent>;
+describe('ClientActivityComponent', () => {
+  let component: ClientActivityComponent;
+  let fixture: ComponentFixture<ClientActivityComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ YesComponent ]
+      declarations: [ ClientActivityComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(YesComponent);
+    fixture = TestBed.createComponent(ClientActivityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
