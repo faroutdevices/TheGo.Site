@@ -1,6 +1,7 @@
 [
   {
     "questionText" : "How is your food?",
+    "questionType" : 1,
     "answer" : [
       "Ok",
       "Great",
@@ -8,6 +9,7 @@
   },
   {
     "questionText" : "How is your drink?",
+    "questionType" : 1,
     "answer" : [
       "Ok",
       "Great",
@@ -15,9 +17,15 @@
   },
   {
     "questionText" : "How is the ambience?",
+    "questionType" : 1,
     "answer" : [
       "Ok",
       "Great",
       "Bad" ]
+  },
+  {
+    "questionText" : "Any advice for us?",
+    "questionType" : 2,
+    "answer" : ["a","a"]
   }
 ]

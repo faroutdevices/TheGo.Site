@@ -7,23 +7,9 @@ import { environment } from 'src/environments/environment';
 import { Router,NavigationEnd } from '@angular/router';
 import ImportedQuestions from './questionsList1.json'; //Read values from my json file
 
-// class Question{
-//   public questionText: string = "";
-//   public answer: string[] = [];
-
-//   public addQuestion(newQuestion: string, newAnswers: string[], optionalSomething?: string)
-//   {
-//     this.questionText = newQuestion;
-
-//     newAnswers.forEach(element => {
-//       this.answer.push(element);
-//     });
-//   }
-// }
-
-
 interface Question{
   questionText: string;
+  questionType: number;
   answer: string[];
 }
 
@@ -51,7 +37,6 @@ export class AppComponent {
     )
 
      this.bunchQuestions = ImportedQuestions as Question[];
-
   }
 
   SendPageRequestDetails_GenerateClientID()

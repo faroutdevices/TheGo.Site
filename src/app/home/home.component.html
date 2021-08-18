@@ -375,11 +375,24 @@
 
 
 <div *ngIf="this.appComponent.bunchQuestions.length > this.appComponent.LastQuestionCompleted">
+
+  <div *ngIf="questionType == 1">
     <div class="card-container" style="display: inline-block;" *ngFor="let hero of this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].answer">
         <a class="card" rel="noopener" (click)="clickFunction(hero)">
           <span>{{ hero }}</span>
         </a>
     </div>
+  </div>
+
+  <div *ngIf="questionType == 2">
+    <div class="card-container" style="display: inline-block;">
+      <textarea rows="5" cols="50" id="questionAnswer" name="questionAnswer" #questionAnswer></textarea>
+        <a class="card" rel="noopener" (click)="clickFunction(questionAnswer.value)">
+          <span>Submit</span>
+        </a>
+    </div>
+  </div>
+
 </div>
 
   <br /><br />

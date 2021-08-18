@@ -4,6 +4,7 @@ import { AppComponent } from '../app.component';
 import { HttpClient } from '@angular/common/http';
 import { ApiReturnedObject2 } from '../api-returned-object2';
 import { CookieService } from 'ngx-cookie-service';
+//import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -11,8 +12,14 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  // form: FormGroup = this.fb.group({
+  //   firstName: [null],
+  //   interests: [null]
+  // });
+
   title = '';
   question = '';
+  questionType;
   answer1 = '';
   answer2 = '';
   answer3 = '';
@@ -23,10 +30,13 @@ export class HomeComponent {
   selection: any = {};
   AppComponent: any;
 
-  constructor(public appComponent: AppComponent, private http: HttpClient, private cookieService: CookieService, private componentFactoryResolver: ComponentFactoryResolver) {
-    console.log("in constructor of home component");
+  constructor(public appComponent: AppComponent,
+     private http: HttpClient, private cookieService: CookieService,
+      private componentFactoryResolver: ComponentFactoryResolver) {
+
     //start with first question, or where user left off
       this.question = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionText;
+      this.questionType = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionType;
 
       this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].answer.forEach(element =>
           {console.log(element)}
@@ -38,6 +48,19 @@ export class HomeComponent {
 
   clickFunction(answer: string)
   {
+    // let theAnswer: string;
+    // if (answer)
+    // {
+    //   theAnswer = answer;
+    // }
+    // else
+    // {
+    //   theAnswer = answerText;
+
+    // }
+
+     console.log(answer);
+
     this.SendQuestionAndAnswerResponseToDB(answer);
 
     this.appComponent.LastQuestionCompleted++;
@@ -46,6 +69,7 @@ export class HomeComponent {
     {
       this.question = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionText;
       //There's only one question which we assign here, but multiple answers which we create buttons for in the html template
+      this.questionType = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionType;
     }
     else
     {
