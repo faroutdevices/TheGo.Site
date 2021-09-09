@@ -8,19 +8,26 @@ import { CookieService} from 'ngx-cookie-service';
 import { FormsModule } from '@angular/forms';
 import { ClientActivityComponent } from './client-activity/client-activity.component';
 import { UserlistComponent } from './userlist/userlist.component';
+import { AdminComponent } from './admin/admin.component';
+import { CompanyInfoComponent } from './company-info/company-info.component';
+
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     ClientActivityComponent,
-    UserlistComponent
+    UserlistComponent,
+    AdminComponent,
+    CompanyInfoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgxQRCodeModule
   ],
   providers:[CookieService],
   bootstrap: [AppComponent],

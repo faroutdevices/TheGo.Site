@@ -51,11 +51,12 @@ export class AppComponent {
         if (returnstuff.TheGoSiteClientID != null)
         {
           this.cookieValue = returnstuff.TheGoSiteClientID;
+          this.cookieService.set('BeenHereBefore', this.cookieValue, 3650); //expires in 10 years
         }
-        this.cookieService.set('BeenHereBefore', this.cookieValue); //update this with expire date, etc perhaps
       }
       )
   }
+
 
   ngOnInit(): void {
   }

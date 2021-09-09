@@ -18,6 +18,7 @@ namespace TheGoSite.Function
         public QuestionAndAnswer() { }
         public string Question { get; set; }
         public string Answer { get; set; }
+        public string Answer_Type { get; set; }
         public string Cookie_Previously_Set { get; set; }
     }
 }

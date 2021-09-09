@@ -4,25 +4,46 @@ import { AppComponent } from '../app.component';
 import { HttpClient } from '@angular/common/http';
 import { ApiReturnedObject2 } from '../api-returned-object2';
 import { CookieService } from 'ngx-cookie-service';
-//import { FormBuilder, FormGroup } from '@angular/forms';
+import { AzureSASCredential, TableServiceClient } from "@azure/data-tables";
+import { Console } from 'console';
+
+const { TableClient, AzureNamedKeyCredential } = require("@azure/data-tables");
+const sas = "?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacuptfx&se=2021-10-11T01:55:29Z&st=2021-09-09T17:55:29Z&spr=https,http&sig=%2FXM2jpRHUT2JRLMA2eumMeidtcEgTMhWmvMWtbtgG1Q%3D";
+
+let tableName = "QuestionAndAnswer";
+const clientWithSAS = new TableClient('https://thegosite1.table.core.windows.net', tableName, new AzureSASCredential(sas));
+
+export class SourceOfRequestRecords
+{
+  TheUser!: String;
+  TheUserHuman!: String;
+  LastVisit!: String;
+  FirstVisit!: String;
+}
+
+export class QuestionAndAnswer
+{
+  TheUser!: String;
+  Question: String = '';
+  Answer!: String;
+}
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent {
-  // form: FormGroup = this.fb.group({
-  //   firstName: [null],
-  //   interests: [null]
-  // });
+[x: string]: any;
+NewVersion: SourceOfRequestRecords[] = [];
+FirstContactDates: SourceOfRequestRecords[] = [];
+IndividualUser?: String;
+TheQuestionsAndAnswers: QuestionAndAnswer[] = [];
+Title?: String;
 
   title = '';
   question = '';
-  questionType;
-  answer1 = '';
-  answer2 = '';
-  answer3 = '';
   isShow = true;
   private cookieValue: string = '';
 
@@ -34,62 +55,103 @@ export class HomeComponent {
      private http: HttpClient, private cookieService: CookieService,
       private componentFactoryResolver: ComponentFactoryResolver) {
 
-    //start with first question, or where user left off
-      this.question = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionText;
-      this.questionType = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionType;
-
-      this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].answer.forEach(element =>
-          {console.log(element)}
-        );
+    //start with first question, or where user left off if browser was closed
+    //or don't restart survey if already complete
+      this.HasUserAlreadyAnsweredAllQuestions();
   }
 
   ngOnInit(): void {
   }
 
-  clickFunction(answer: string)
+clickFunction(answer: string, answerType: number)
+{
+  this.SendQuestionAndAnswerResponseToDB(answer, answerType);
+
+  this.appComponent.LastQuestionCompleted++;
+
+  if (this.appComponent.bunchQuestions.length > this.appComponent.LastQuestionCompleted)
   {
-    // let theAnswer: string;
-    // if (answer)
-    // {
-    //   theAnswer = answer;
-    // }
-    // else
-    // {
-    //   theAnswer = answerText;
+    this.question = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionText;
+    this.questionType = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionType;
+  }
+  else
+  {
+    this.question = "Done, thanks!"
+    this.isShow = !this.isShow;
+    this.showfooter = true;
+  }
+}
 
-    // }
-
-     console.log(answer);
-
-    this.SendQuestionAndAnswerResponseToDB(answer);
-
-    this.appComponent.LastQuestionCompleted++;
-
-    if (this.appComponent.bunchQuestions.length > this.appComponent.LastQuestionCompleted)
+SendQuestionAndAnswerResponseToDB(answer: string, answerType: number)
+{
+  this.cookieValue = this.cookieService.get('BeenHereBefore');
+  console.log(this.cookieValue);
+  this.http.get<ApiReturnedObject2>(environment.urlFunctions1 + '/api/HttpTrigger_QuestionAndAnswer?Question=' + this.question + '&BeenHereBefore=' + this.cookieValue + '&Answer=' + answer + '&AnswerType=' + answerType).subscribe(returnstuff =>
     {
-      this.question = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionText;
-      //There's only one question which we assign here, but multiple answers which we create buttons for in the html template
-      this.questionType = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionType;
+      //maybe do something
     }
-    else
-    {
-      this.question = "Done, thanks!"
-      this.isShow = !this.isShow;
-    }
+  )
+}
 
-    console.log(this.model.email);
-    this.model.email = 'set it in code';
+//look to see the last question completed, and don't allow user to take survey again
+HasUserAlreadyAnsweredAllQuestions(){
+  let theUserLookingFor = this.cookieService.get('BeenHereBefore');
+  tableName = 'QuestionAndAnswer';
+  let clientWithSAS = new TableClient('https://thegosite1.table.core.windows.net', tableName, new AzureSASCredential(sas));
+
+console.log(clientWithSAS);
+
+const main = async () => {
+
+  let entitiesIter = clientWithSAS.listEntities();
+  let i = 1;
+  for await (const entity of entitiesIter) {
+    let toAddThing: QuestionAndAnswer = new QuestionAndAnswer();
+    toAddThing.TheUser = entity.Cookie_Previously_Set;
+    toAddThing.Question = entity.Question;
+    toAddThing.Answer = entity.Answer;
+    this.TheQuestionsAndAnswers.push(toAddThing);
+    i++;
+
+    //console.log(i);
   }
 
-  SendQuestionAndAnswerResponseToDB(answer: string)
+  this.TheQuestionsAndAnswers = this.TheQuestionsAndAnswers.filter(x => x.TheUser == theUserLookingFor);
+
+  console.log(theUserLookingFor + 'user');
+  console.log(this.TheQuestionsAndAnswers.length + 'num of answers');
+
+ if (this.TheQuestionsAndAnswers.length >= this.appComponent.bunchQuestions.length)
   {
-    this.cookieValue = this.cookieService.get('BeenHereBefore');
+    console.log(this.TheQuestionsAndAnswers.length + ' length 1');
+    console.log(this.appComponent.bunchQuestions.length + ' length 2');
 
-    this.http.get<ApiReturnedObject2>(environment.urlFunctions1 + '/api/HttpTrigger_QuestionAndAnswer?Question=' + this.question + '&BeenHereBefore=' + this.cookieValue + '&Answer=' + answer).subscribe(returnstuff =>
-      {
-
-      }
-    )
+    this.question = "You've already completed the survey."
+    this.isShow = !this.isShow;
   }
+  else
+  {
+    //console.log(this.appComponent.LastQuestionCompleted);
+
+    this.appComponent.LastQuestionCompleted = this.TheQuestionsAndAnswers.length;
+    this.question = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionText;
+    this.questionType = this.appComponent.bunchQuestions[this.appComponent.LastQuestionCompleted].questionType;
+  }
+
+  console.log('here2');
+
+}
+
+let theAnswer = main();
+
+this.showUsers1 = false;
+this.showUsers2 = true;
+
+}
+
+RemoveCookie()
+{
+  this.cookieService.delete('BeenHereBefore');
+}
 
 }

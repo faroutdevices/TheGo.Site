@@ -21,10 +21,11 @@ namespace TheGoSite.Function
         {
             log.LogInformation("C# HttpTrigger_QuestionAndAnswer function processed a request.");
 
-          
+
             string question = req.Query["Question"];
             string beenHereBefore = req.Query["BeenHereBefore"];
             string answer = req.Query["Answer"];
+            string answerType = req.Query["AnswerType"];
 
             QuestionAndAnswer record = new QuestionAndAnswer();
             record.PartitionKey = "thegosite1";
@@ -32,6 +33,7 @@ namespace TheGoSite.Function
             record.Question = question;
             record.Cookie_Previously_Set = beenHereBefore;
             record.Answer = answer;
+            record.Answer_Type = answerType;
 
             bool result = InsertIntoAzureTable(record);
 

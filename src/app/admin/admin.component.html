@@ -1,0 +1,66 @@
+<ng-container *ngIf='PageSection==1'>
+Hi, we are the tiny pulse of business.<br /> If you are business owner/manager, you can see anonymous customer opinions of your establishment.
+
+</ng-container>
+
+<ng-container *ngIf='PageSection==2'>
+
+
+  Login
+  <br />
+  <input type="email" id="txtEmailAddress" />
+  <button type="submit" id="btnSubmit" (click)="Login()" >Submit</button>
+
+
+What your customer have to say:
+<br />
+<a (click)="ShowPageSection(3)">Show multiple choice stats</a>
+</ng-container>
+
+<ng-container *ngIf='PageSection==3'>
+  Question Stats:
+  <br />
+  <a (click)="ShowPageSection(4)">Show question and answer admin</a>
+</ng-container>
+
+
+<ng-container *ngIf='PageSection==4'>
+
+  <br />
+      <table style="text-align:left" >
+        <tr>
+          <th></th>
+          <!-- <th>Question free</th>
+          <th>Answer</th> -->
+        </tr>
+        <tr style="border-width: 10px; border-style: solid; border-color:black;" *ngFor="let item of questionAndAnswerDataService.SingleUserSurvey">
+
+          <td *ngIf="item.Answer != '--SPACER--'">
+            Food?
+          </td>
+          <td *ngIf="item.Answer != '--SPACER--'">
+            {{item.Answer }}
+          </td>
+          <td *ngIf="item.Answer == '--SPACER--'">
+            <br /><br />
+          </td>
+          <td *ngIf="item.Answer == '--SPACER--'">
+            <br /><br />
+          </td>
+
+        </tr>
+      </table>
+
+</ng-container>
+
+<ng-container *ngIf='PageSection==4'>
+  <br />
+  Print out, or download this unique QR Code:
+  <br />
+  <br />
+  <ngx-qrcode
+    [elementType]="elementType"
+    [errorCorrectionLevel]="correctionLevel"
+    [value]="value"
+    cssClass="bshadow"></ngx-qrcode>
+</ng-container>
